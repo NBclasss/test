@@ -1,0 +1,81 @@
+# import logging
+# import os
+#
+#
+# def init_logger(out_pth: str = 'D:/opencvtest/B4.1.1/text4.3.log'):
+#
+#     # 创建Logger对象
+#     logger = logging.getLogger(__name__)
+#
+#     # 设置日志记录的总级别
+#     logger.setLevel(logging.DEBUG)
+#
+#     # 创建一个输出到文件的handler
+#     file_handler = logging.FileHandler(out_pth)
+#     file_handler.setLevel(logging.DEBUG)  # 设定这个handler的日志级别
+#
+#     # 创建一个输出到控制台的handler
+#     console_handler = logging.StreamHandler()
+#     console_handler.setLevel(logging.INFO)  # 设定这个handler的日志级别
+#
+#     # 设定日志格式
+#     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+#     file_handler.setFormatter(formatter)
+#     console_handler.setFormatter(formatter)
+#
+#     # 将handler添加到logger对象中
+#     logger.addHandler(file_handler)
+#     logger.addHandler(console_handler)
+#
+#     return logger
+#
+#
+# # 使用例子
+#
+# logger = init_logger('D:/opencvtest/B4.1.1/text4.3.log')
+#
+# # logging级别，从高到低排序，以下是各级别的使用方法：
+# logger.critical("This is a critical message.")  # 严重错误，表明应用程序可能无法继续运行
+# logger.error("This is an error message.")      # 由于严重的问题，软件功能无法执行
+# logger.warning("This is a warning message.")   # 有可能会发生的问题，用于提示用户
+# logger.info("This is an info message.")        # 通常用于确认程序运行正常
+# logger.debug("This is a debug message.")       # 详细的信息，通常用于诊断问题
+#
+#
+
+
+
+# 首先导入需要的库
+import logging
+import os
+
+
+# 定义初始化logger的函数
+def init_logger(out_pth: str = 'D:/opencvtest/B4.1.1/text4.3.log'):
+
+    # 创建一个日志记录器对象
+    logger = logging.getLogger(__name__)
+
+    logger.setLevel(logging.DEBUG)
+    # 将日志消息写入一个文件。
+    file_handler = logging.FileHandler(out_pth)
+    file_handler.setLevel(logging.DEBUG)
+    # 将日志消息打印到控制台。
+    console_print = logging.StreamHandler()
+    console_print.setLevel(logging.DEBUG)
+    type = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    # 将这个格式应用于handler。
+    file_handler.setFormatter(type)
+    console_print.setFormatter(type)
+    # 将handler添加到logger对象中。
+    logger.addHandler(file_handler)
+    logger.addHandler(print)
+    return logger
+
+logger = init_logger()
+logger.debug("这是一个debug消息，通常用于详细的诊断问题。")
+logger.info("这是一个info消息，确认程序按预期运行。")
+logger.warning("这是一个warning消息，表示可能的问题。")
+logger.error("这是一个error消息，表示发生了一个错误。")
+logger.critical("这是一个critical消息，表示发生了一个严重的错误，可能导致程序崩溃。")
